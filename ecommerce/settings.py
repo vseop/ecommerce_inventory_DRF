@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
     'ecommerce.dashboard',
     'ecommerce.inventory',
+    'ecommerce.demo',
 ]
 
 MIDDLEWARE = [
