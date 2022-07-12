@@ -114,6 +114,7 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+
 class ProductType(models.Model):
     """
     Product type table
@@ -148,6 +149,7 @@ class Brand(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class ProductInventory(models.Model):
     """
@@ -252,6 +254,7 @@ class ProductInventory(models.Model):
     def __str__(self):
         return self.product.name
 
+
 class Media(models.Model):
     """
     The product image table.
@@ -299,3 +302,34 @@ class Media(models.Model):
     class Meta:
         verbose_name = _("product image")
         verbose_name_plural = _("product images")
+
+
+class Stock(models.Model):
+    product_inventory = models.OneToOneField(
+        ProductInventory,
+        related_name="product_inventory",
+        on_delete=models.PROTECT,
+    )
+    last_checked = models.DateTimeField(
+        unique=False,
+        null=True,
+        blank=True,
+        verbose_name=_("inventory stock check date"),
+        help_text=_("format: Y-m-d H:M:S, null-true, blank-true"),
+    )
+    units = models.IntegerField(
+        default=0,
+        unique=False,
+        null=False,
+        blank=False,
+        verbose_name=_("units/qty of stock"),
+        help_text=_("format: required, default-0"),
+    )
+    units_sold = models.IntegerField(
+        default=0,
+        unique=False,
+        null=False,
+        blank=False,
+        verbose_name=_("units sold to date"),
+        help_text=_("format: required, default-0"),
+    )
