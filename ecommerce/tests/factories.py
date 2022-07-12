@@ -68,6 +68,7 @@ class ProductInventoryFactory(factory.django.DjangoModelFactory):
     sale_price = 46
     weight = 987
 
+
 class MediaFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = models.Media
@@ -77,9 +78,20 @@ class MediaFactory(factory.django.DjangoModelFactory):
     alt_text = "a default image solid color"
     is_feature = True
 
+
+class StockFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = models.Stock
+
+    product_inventory = factory.SubFactory(ProductInventoryFactory)
+    units = 2
+    units_sold = 100
+
+
 register(CategoryFactory)
 register(ProductFactory)
 register(ProductTypeFactory)
 register(BrandFactory)
 register(ProductInventoryFactory)
 register(MediaFactory)
+register(StockFactory)
