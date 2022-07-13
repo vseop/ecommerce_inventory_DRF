@@ -175,6 +175,7 @@ class ProductAttribute(models.Model):
     def __str__(self):
         return self.name
 
+
 class ProductAttributeValue(models.Model):
     """
     Product attribute value table
@@ -228,11 +229,11 @@ class ProductInventory(models.Model):
     brand = models.ForeignKey(
         Brand, related_name="brand", on_delete=models.PROTECT
     )
-    # attribute_values = models.ManyToManyField(
-    #     ProductAttributeValue,
-    #     related_name="product_attribute_values",
-    #     through="ProductAttributeValues",
-    # )
+    attribute_values = models.ManyToManyField(
+        ProductAttributeValue,
+        related_name="product_attribute_values",
+        through="ProductAttributeValues",
+    )
     is_active = models.BooleanField(
         default=True,
         verbose_name=_("product visibility"),
@@ -380,3 +381,23 @@ class Stock(models.Model):
         verbose_name=_("units sold to date"),
         help_text=_("format: required, default-0"),
     )
+
+
+class ProductAttributeValues(models.Model):
+    """
+    Product attribute values link table
+    """
+
+    attributevalues = models.ForeignKey(
+        "ProductAttributeValue",
+        related_name="attributevaluess",
+        on_delete=models.PROTECT,
+    )
+    productinventory = models.ForeignKey(
+        ProductInventory,
+        related_name="productattributevaluess",
+        on_delete=models.PROTECT,
+    )
+
+    class Meta:
+        unique_together = (("attributevalues", "productinventory"),)
