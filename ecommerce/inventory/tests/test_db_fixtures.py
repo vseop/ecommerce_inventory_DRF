@@ -337,3 +337,27 @@ def test_inventory_db_product_attrubite_uniqueness_integrity(
     product_attribute_factory.create(name="not_unique")
     with pytest.raises(IntegrityError):
         product_attribute_factory.create(name="not_unique")
+
+@pytest.mark.dbfixture
+@pytest.mark.parametrize(
+    "id, product_attribute, attribute_value",
+    [
+        (1, 1, 10),
+    ],
+)
+def test_inventory_db_product_attribute_value_dataset(
+    db, db_fixture_setup, id, product_attribute, attribute_value
+):
+    result = models.ProductAttributeValue.objects.get(id=1)
+    assert result.product_attribute.id == 1
+    assert result.attribute_value == "10"
+
+
+def test_inventory_db_product_attribute_value_data(
+    db, product_attribute_value_factory
+):
+    new_attribute_value = product_attribute_value_factory.create(
+        attribute_value="new_value", product_attribute__name="new_value"
+    )
+    assert new_attribute_value.attribute_value == "new_value"
+    assert new_attribute_value.product_attribute.name == "new_value"
