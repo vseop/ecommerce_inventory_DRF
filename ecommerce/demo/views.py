@@ -29,10 +29,12 @@ def product_by_category(request, category):
 def product_detail(request, slug):
     # x = models.Product.objects.filter(slug=slug)
 
-    # x = models.ProductInventory.objects.filter(product__slug=slug).values("id", "product__name", "store_price", "is_default", "attribute_values__attribute_value")
+    # x = models.ProductInventory.objects.filter(product__slug=slug).values(
+    # "id", "product__name", "store_price", "is_default", "attribute_values__attribute_value")
 
     # Using chained filters approach
-    # x = models.ProductInventory.objects.filter(product__slug=slug).filter(attribute_values__attribute_value="red").filter(attribute_values__attribute_value=5).select_related('product')
+    # x = models.ProductInventory.objects.filter(product__slug=slug).filter(
+    # attribute_values__attribute_value="red").filter(attribute_values__attribute_value=5).select_related('product')
 
     # from django.db.models import Count
     # filter_arguments = [5, "red"]
