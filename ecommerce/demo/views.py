@@ -9,7 +9,6 @@ def home(request):
 
 def category(request):
     data = models.Category.objects.all()
-    # print(models.Category.objects.all().query)
 
     return render(request, "categories.html", {"data": data})
 
@@ -38,7 +37,9 @@ def product_detail(request, slug):
 
     # from django.db.models import Count
     # filter_arguments = [5, "red"]
-    # x = models.ProductInventory.objects.filter(product__slug=slug).filter(attribute_values__attribute_value__in=filter_arguments).annotate(num_tags=Count('attribute_values')).filter(num_tags=len(filter_arguments))
+    # x = models.ProductInventory.objects.filter(product__slug=slug).filter(
+    # attribute_values__attribute_value__in=filter_arguments).annotate(
+    # num_tags=Count('attribute_values')).filter(num_tags=len(filter_arguments))
 
     # Dynamic Filter
     filter_arguments = []
@@ -55,6 +56,8 @@ def product_detail(request, slug):
             num_tags=len(filter_arguments)).values(
             "id", "sku", "product__name", "store_price", "product_inventory__units").annotate(
             field_a=ArrayAgg("attribute_values__attribute_value")).get()
+
+
     else:
 
         from django.contrib.postgres.aggregates import ArrayAgg

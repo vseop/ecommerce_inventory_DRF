@@ -10,21 +10,13 @@ class Category(MPTTModel):
 
     name = models.CharField(
         max_length=100,
-        null=False,
-        unique=False,
-        blank=False,
         verbose_name=_("category name"),
         help_text=_("format: required, max-100"),
     )
     slug = models.SlugField(
         max_length=150,
-        null=False,
-        unique=False,
-        blank=False,
         verbose_name=_("category safe URL"),
-        help_text=_(
-            "format: required, letters, numbers, underscore, or hyphens"
-        ),
+        help_text=_("format: required, letters, numbers, underscore, or hyphens"),
     )
     is_active = models.BooleanField(
         default=True,
@@ -36,7 +28,6 @@ class Category(MPTTModel):
         related_name="children",
         null=True,
         blank=True,
-        unique=False,
         verbose_name=_("parent of category"),
         help_text=_("format: not required"),
     )
@@ -114,6 +105,7 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+
 class Brand(models.Model):
     """
     Product brand table
@@ -176,6 +168,7 @@ class ProductType(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class ProductAttributeValue(models.Model):
     """
