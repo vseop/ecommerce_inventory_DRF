@@ -11,8 +11,6 @@ from ecommerce.inventory.models import (
 from rest_framework import serializers
 
 
-
-
 class AllProductSerializer(serializers.HyperlinkedModelSerializer):
     category = serializers.StringRelatedField(many=True)
     product = serializers.StringRelatedField(many=True)
