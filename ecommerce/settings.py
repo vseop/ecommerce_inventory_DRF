@@ -39,11 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'mptt',
-    'django_elasticsearch_dsl',
+    'rest_framework',
+    # 'django_elasticsearch_dsl',
 
     'ecommerce.dashboard',
     'ecommerce.inventory',
     'ecommerce.demo',
+    'ecommerce.drf'
 ]
 
 MIDDLEWARE = [
@@ -141,6 +143,6 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-ELASTICSEARCH_DSL = {
-    'default': {'hosts': 'localhost:9200'}
-}
+# ELASTICSEARCH_DSL = {
+#     'default': {'hosts': 'localhost:9200'}
+# }

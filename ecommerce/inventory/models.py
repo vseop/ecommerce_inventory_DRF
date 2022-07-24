@@ -309,7 +309,7 @@ class Media(models.Model):
         on_delete=models.PROTECT,
         related_name="media_product_inventory",
     )
-    img_url = models.ImageField(
+    image = models.ImageField(
         unique=False,
         null=False,
         blank=False,
