@@ -31,16 +31,16 @@ class ProductTypeSerializer(serializers.ModelSerializer):
 
 
 class MediaSerializer(serializers.ModelSerializer):
-    img_url = serializers.SerializerMethodField()
+    image = serializers.SerializerMethodField()
 
     class Meta:
         model = Media
-        fields = ["img_url", "alt_text"]
+        fields = ["image", "alt_text"]
         read_only = True
         editable = False
 
-    def get_img_url(self, obj):
-        return self.context["request"].build_absolute_uri(obj.img_url.url)
+    def get_image(self, obj):
+        return self.context["request"].build_absolute_uri(obj.image.url)
 
 
 class CategorySerializer(serializers.ModelSerializer):
