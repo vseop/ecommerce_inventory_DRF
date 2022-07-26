@@ -5,11 +5,11 @@ from ecommerce.drf import views
 
 router = routers.DefaultRouter()
 router.register(
-    r'api', views.AllProductsViewSet, basename="allproducts"
+    r"category/(?P<slug>[^/.]+)",
+    views.ProductByCategory,
+    basename="productbycategory",
 )
-router.register(
-    r'product/(?P<slug>[^/.]+)', views.ProductInventoryViewSet, basename="products"
-)
+# router.register(r"item/(?P<id>[^/.]+)", views.SingleProductViewSet, basename="items")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
