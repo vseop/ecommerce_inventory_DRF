@@ -1,7 +1,7 @@
 from rest_framework import viewsets, mixins, permissions
 from rest_framework.response import Response
-from ecommerce.drf.serializer import AllProducts
-from ecommerce.inventory.models import Product
+from ecommerce.drf.serializer import AllProducts, ProductInventorySerializer
+from ecommerce.inventory.models import Product, ProductInventory
 
 
 class AllProductsViewSet(
@@ -18,3 +18,8 @@ class AllProductsViewSet(
         queryset = Product.objects.filter(category__slug=slug)[:10]
         serializer = AllProducts(queryset, many=True)
         return Response(serializer.data)
+
+
+class ProductInventoryViewSet(viewsets.GenericViewSet, mixins.ListModelMixin):
+    queryset = ProductInventory.objects.all()
+    serializer_class = ProductInventorySerializer

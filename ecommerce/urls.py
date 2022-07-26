@@ -7,6 +7,9 @@ router = routers.DefaultRouter()
 router.register(
     r'api', views.AllProductsViewSet, basename="allproducts"
 )
+router.register(
+    r'product', views.ProductInventoryViewSet, basename="products"
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
