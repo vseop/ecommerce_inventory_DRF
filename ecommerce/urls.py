@@ -8,7 +8,7 @@ router.register(
     r'api', views.AllProductsViewSet, basename="allproducts"
 )
 router.register(
-    r'product', views.ProductInventoryViewSet, basename="products"
+    r'product/(?P<slug>[^/.]+)', views.ProductInventoryViewSet, basename="products"
 )
 
 urlpatterns = [

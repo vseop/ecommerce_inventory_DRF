@@ -10,6 +10,19 @@ from ecommerce.inventory.models import (
 )
 
 
+class MediaSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Media
+        fields = ["img_url", "alt_text"]
+        read_only = True
+        editable = False
+
+    def get_image(self, obj):
+        return self.context["request"].build_absolute_uri(obj.image.url)
+
+
 class ProductAttributeValueSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductAttributeValue
@@ -36,6 +49,9 @@ class ProductInventorySerializer(serializers.ModelSerializer):
     brand = BrandSerializer(many=False, read_only=True)
     attributes = ProductAttributeValueSerializer(
         source="attribute_values", many=True, read_only=True
+    )
+    image = MediaSerializer(
+        source="media_product_inventory", many=True, read_only=True
     )
 
     class Meta:

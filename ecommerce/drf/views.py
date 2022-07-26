@@ -22,4 +22,13 @@ class AllProductsViewSet(
 
 class ProductInventoryViewSet(viewsets.GenericViewSet, mixins.ListModelMixin):
     queryset = ProductInventory.objects.all()
-    serializer_class = ProductInventorySerializer
+    # serializer_class = ProductInventorySerializer
+
+    def list(self, request, slug=None):
+        queryset = ProductInventory.objects.filter(
+            product__category__slug=slug,
+        ).filter(is_default=True)[:10]
+        serializer = ProductInventorySerializer(
+            queryset, context={"request": request}, many=True
+        )
+        return Response(serializer.data)
