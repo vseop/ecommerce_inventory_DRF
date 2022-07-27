@@ -50,40 +50,43 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class ProductSerializer(serializers.ModelSerializer):
-    category = CategorySerializer(many=True)
+    # category = CategorySerializer(many=True)
 
     class Meta:
         model = Product
-        fields = ["web_id", "slug", "name", "description", "category"]
+        # fields = ["web_id", "slug", "name", "description", "category"]
+        fields = ["name"]
         read_only = True
         editable = False
 
 
 class ProductInventorySerializer(serializers.ModelSerializer):
     product = ProductSerializer(read_only=True)
-    image = MediaSerializer(
-        source="media_product_inventory", many=True, read_only=True
-    )
-    type = ProductTypeSerializer(source="product_type", read_only=True)
-    brand = BrandSerializer(read_only=True)
-    attributes = ProductAttributeValueSerializer(
-        source="attribute_values", many=True, read_only=True
-    )
-    price = serializers.DecimalField(
-        source="retail_price", max_digits=5, decimal_places=2
-    )
+    # image = MediaSerializer(
+    #     source="media_product_inventory", many=True, read_only=True
+    # )
+    # type = ProductTypeSerializer(source="product_type", read_only=True)
+    # brand = BrandSerializer(read_only=True)
+    # attributes = ProductAttributeValueSerializer(
+    #     source="attribute_values", many=True, read_only=True
+    # )
+    # price = serializers.DecimalField(
+    #     source="retail_price", max_digits=5, decimal_places=2
+    # )
 
     class Meta:
         model = ProductInventory
         fields = [
+            "id",
             "sku",
-            "price",
+            # "price",
+            "store_price",
             "is_default",
             "product",
-            "image",
-            "type",
-            "brand",
-            "attributes",
+            # "image",
+            # "type",
+            # "brand",
+            # "attributes",
         ]
         read_only = True
 

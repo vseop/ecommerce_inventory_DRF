@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from ecommerce.drf import views
+from ecommerce.search.views import SearchProductInventory
 
 router = routers.DefaultRouter()
 router.register(
@@ -14,5 +15,7 @@ router.register(
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('demo/', include("ecommerce.demo.urls", namespace="demo")),
+    path('search/<str:query>/', SearchProductInventory.as_view()),
     path('', include(router.urls)),
+
 ]
