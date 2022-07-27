@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_elasticsearch_dsl',
 
-    'ecommerce.dashboard',
+    # 'ecommerce.dashboard',
     'ecommerce.inventory',
     'ecommerce.demo',
     'ecommerce.drf',
