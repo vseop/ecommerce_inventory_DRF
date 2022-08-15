@@ -17,6 +17,7 @@ def category_with_child(db):
     child = parent.children.first()
     return child
 
+
 @pytest.fixture
 def single_product(db, category_with_child):
     product = Product.objects.create(
