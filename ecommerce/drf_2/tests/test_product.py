@@ -1,10 +1,9 @@
 import json
 
 
-
-
 def test_get_product_by_category(api_client, single_product):
     product = single_product
+    # print(product.category)
     endpoint = f"/api/inventory/products/category/{product.category}/"
     response = api_client().get(endpoint)
     expected_json = [
@@ -15,6 +14,5 @@ def test_get_product_by_category(api_client, single_product):
     ]
     assert response.status_code == 200
     assert response.data == expected_json
-
 
 #

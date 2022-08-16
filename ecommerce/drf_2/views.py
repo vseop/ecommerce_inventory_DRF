@@ -3,8 +3,8 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from ecommerce.drf_2.serializer import CategorySerializer
-from ecommerce.inventory.models import Category
+from ecommerce.drf_2.serializer import CategorySerializer, ProductSerializer
+from ecommerce.inventory.models import Category, Product
 
 
 class CategoryList(APIView):
@@ -15,4 +15,15 @@ class CategoryList(APIView):
     def get(self, request):
         queryset = Category.objects.all()
         serializer = CategorySerializer(queryset, many=True)
+        return Response(serializer.data)
+
+
+class ProductByCategory(APIView):
+    """
+    Return product by category
+    """
+
+    def get(self, request, query=None):
+        queryset = Product.objects.filter(category__slug=query)
+        serializer = ProductSerializer(queryset, many=True)
         return Response(serializer.data)
