@@ -24,10 +24,17 @@ services:
   #   ports:
   #     - "5050:80"
 
-  esearch:
+  elasticsearch:
     container_name: search
     image: elasticsearch:7.14.2
     environment:
+      - cluster.name=ecommerce-elasticsearch
       - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - ES_JAVA_OPTS=-Xms128m -Xmx128m
     ports:
       - "9200:9200"
+    volumes:
+      - ./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    depends_on:
+      - pgdb
