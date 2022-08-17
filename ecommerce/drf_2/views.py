@@ -3,7 +3,7 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from ecommerce.drf_2.serializer import CategorySerializer, ProductSerializer
+from ecommerce.drf_2.serializer import CategorySerializer, ProductSerializer, ProductInventorySerializer
 from ecommerce.inventory.models import Category, Product, ProductInventory
 
 
