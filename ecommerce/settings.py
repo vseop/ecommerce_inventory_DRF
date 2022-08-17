@@ -40,7 +40,7 @@ INSTALLED_APPS = [
 
     'mptt',
     'rest_framework',
-    'django_elasticsearch_dsl',
+    # 'django_elasticsearch_dsl',
 
     'ecommerce.inventory',
     # 'ecommerce.demo',
