@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'ecommerce.demo',
     'ecommerce.drf',
     'ecommerce.drf_2',
-    # 'ecommerce.search',
+    'ecommerce.search',
 ]
 
 MIDDLEWARE = [
