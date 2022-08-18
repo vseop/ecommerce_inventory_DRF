@@ -20,6 +20,7 @@ urlpatterns = [
     path("api/inventory/products/category/<str:query>/", ProductByCategory.as_view()),
     path("api/inventory/<int:query>/", ProductInventoryByWebId.as_view()),
     path("api/search/<str:query>/", SearchProductInventory.as_view()),
+    path("ninja/", include("ecommerce.dninja.urls")),
     path('', include(router.urls)),
 
 ]
