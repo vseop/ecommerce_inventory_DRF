@@ -33,7 +33,7 @@ services:
       - bootstrap.memory_lock=true
       - ES_JAVA_OPTS=-Xms128m -Xmx128m
     ports:
-      - "9200:9200"
+      - 9200:9200
     volumes:
       - ./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
     depends_on:
