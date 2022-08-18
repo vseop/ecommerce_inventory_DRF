@@ -41,12 +41,14 @@ INSTALLED_APPS = [
     'mptt',
     'rest_framework',
     'django_elasticsearch_dsl',
+    'ninja',
 
     'ecommerce.inventory',
     'ecommerce.demo',
     'ecommerce.drf',
     'ecommerce.drf_2',
     'ecommerce.search',
+    'ecommerce.dninja',
 ]
 
 MIDDLEWARE = [
