@@ -14,10 +14,7 @@ def category_list(request):
     return qs
 
 
-@api.get(
-    "/inventory/products/category/{category_slug}/",
-    response=List[ProductSchema],
-)
+@api.get("/inventory/products/category/{category_slug}/", response=List[ProductSchema])
 def category_list(request, category_slug: str):
     qs = Product.objects.filter(category__slug=category_slug)
     return qs
