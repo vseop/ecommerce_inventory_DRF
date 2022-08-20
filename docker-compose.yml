@@ -34,7 +34,7 @@ services:
   #   restart: always
 
   #   environment:
-  #     PGADMIN_DEFAULT_EMAIL: a@a.com
+  #     PGADMIN_DEFAULT_EMAIL: iv@mail.com
   #     PGADMIN_DEFAULT_PASSWORD: password
   #   ports:
   #     - "5050:80"
@@ -48,8 +48,49 @@ services:
       - bootstrap.memory_lock=true
       - ES_JAVA_OPTS=-Xms128m -Xmx128m
     ports:
-      - 9200:9200
+      - "9200:9200"
     volumes:
       - ./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
     depends_on:
       - pgdb
+
+  redis:
+    container_name: redis
+    restart: always
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+
+  celery:
+    container_name: celery_ecommercev2
+    restart: always
+    build:
+      context: .
+    command: celery -A ecommerce worker -l info
+    environment:
+      - DEBUG=1
+      - CELERY_BROKER=redis://redis:6379/0
+      - CELERY_BACKEND=redis://redis:6379:0
+    depends_on:
+      - redis
+    volumes:
+      - .:/usr/src/app/
+  celery-beat:
+    container_name: celery_beat_ecommerce
+    restart: always
+    build:
+      context: .
+    command: celery -A ecommerce beat -l info
+    depends_on:
+      - redis
+      - celery
+    volumes:
+      - .:/usr/src/app/
+  flower:
+    container_name: flower_ecommerce
+    image: mher/flower
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - FLOWER_PORT=8888
+    ports:
+      - 8888:8888
