@@ -15,6 +15,7 @@ services:
     depends_on:
       - redis
       - pgdb
+      - elasticsearch
 
   pgdb:
     container_name: pgdb_ecommercev2
@@ -42,6 +43,7 @@ services:
   elasticsearch:
     container_name: search
     image: elasticsearch:7.14.2
+    restart: always
     environment:
       - cluster.name=docker-cluster
       - discovery.type=single-node

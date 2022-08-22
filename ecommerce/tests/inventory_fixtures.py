@@ -98,8 +98,8 @@ def single_sub_product_with_media_and_attributes(
         is_default=True,
         retail_price="199.99",
         store_price="99.99",
-        sale_price="9.99",
-        is_on_sale=False,
+        # sale_price="9.99",
+        # is_on_sale=False,
         is_digital=False,
         weight=1000.0,
     )

@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'ecommerce.drf_2',
     'ecommerce.search',
     'ecommerce.dninja',
+    'ecommerce.promotion',
 ]
 
 MIDDLEWARE = [
@@ -147,7 +148,7 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 ELASTICSEARCH_DSL = {
-    'default': {'hosts': 'localhost:9200'}
+    'default': {'hosts': 'elasticsearch'}
 }
 
 REST_FRAMEWORK = {
