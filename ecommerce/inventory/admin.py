@@ -1,6 +1,13 @@
 from django.contrib import admin
 
-from ecommerce.inventory.models import Category, Product
+from . import models
 
-admin.site.register(Category)
-admin.site.register(Product)
+admin.site.register(models.Product)
+admin.site.register(models.Category)
+
+
+class InventoryAdmin(admin.ModelAdmin):
+    list_display = ("product", "store_price")
+
+
+admin.site.register(models.ProductInventory, InventoryAdmin)
