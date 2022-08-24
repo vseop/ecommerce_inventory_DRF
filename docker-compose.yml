@@ -63,20 +63,20 @@ services:
     ports:
       - 6379:6379
 
-#   celery:
-#     container_name: celery_ecommercev2
-#     restart: always
-#     build:
-#       context: .
-#     command: celery -A ecommerce worker -l info
-#     environment:
-#       - DEBUG=1
-#       - CELERY_BROKER=redis://redis:6379/0
-#       - CELERY_BACKEND=redis://redis:6379:0
-#     depends_on:
-#       - redis
-#     volumes:
-#       - .:/usr/src/app/
+  celery:
+    container_name: celery_ecommercev2
+    restart: always
+    build:
+      context: .
+    command: celery -A ecommerce worker -l info
+    environment:
+      - DEBUG=1
+      - CELERY_BROKER=redis://redis:6379/0
+      - CELERY_BACKEND=redis://redis:6379:0
+    depends_on:
+      - redis
+    volumes:
+      - .:/usr/src/app/
 #   celery-beat:
 #     container_name: celery_beat_ecommerce
 #     restart: always
