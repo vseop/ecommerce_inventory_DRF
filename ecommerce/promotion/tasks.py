@@ -21,6 +21,7 @@ def promotion_prices(reduction_amount, obj_id):
                 promo.promo_price = Decimal(new_price)
                 promo.save()
 
+
 @shared_task()
 def promotion_management():
     with transaction.atomic():

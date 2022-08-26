@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from . import models
-from .tasks import promotion_prices
+from .tasks import promotion_prices, promotion_management
 
 
 class ProductOnPromotion(admin.StackedInline):
@@ -18,6 +18,7 @@ class ProductInventoryList(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         super().save_model(request, obj, form, change)
         promotion_prices.delay(obj.promo_reduction, obj.id)
+        promotion_management.delay()
 
 
 admin.site.register(models.Promotion, ProductInventoryList)
