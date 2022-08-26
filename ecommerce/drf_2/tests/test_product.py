@@ -19,7 +19,7 @@ def test_get_product_by_category(api_client, single_product):
 
 
 def test_get_inventory_by_web_id(
-    api_client, single_sub_product_with_media_and_attributes
+        api_client, single_sub_product_with_media_and_attributes
 ):
     fixture = convert_to_dot_notation(
         single_sub_product_with_media_and_attributes
@@ -40,6 +40,7 @@ def test_get_inventory_by_web_id(
                 "web_id": fixture.inventory.product.web_id,
             },
             # "is_on_sale": fixture.inventory.is_on_sale,
+            "promotion_price": None,
             "weight": fixture.inventory.weight,
             "media": [
                 {
