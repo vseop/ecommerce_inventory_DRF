@@ -21,6 +21,8 @@ elasticsearch==7.17.4
 elasticsearch-dsl==7.4.0
 factory-boy==3.2.1
 Faker==13.15.0
+flower==1.2.0
+humanize==4.3.0
 idna==3.3
 inflection==0.5.1
 iniconfig==1.1.1
@@ -28,6 +30,7 @@ kombu==5.2.4
 packaging==21.3
 Pillow==9.2.0
 pluggy==1.0.0
+prometheus-client==0.14.1
 prompt-toolkit==3.0.30
 psycopg2-binary==2.9.2
 py==1.11.0
@@ -51,6 +54,7 @@ sqlparse==0.4.2
 tenacity==6.3.1
 toml==0.10.2
 tomli==2.0.1
+tornado==6.2
 typing_extensions==4.3.0
 urllib3==1.26.10
 vine==5.0.0

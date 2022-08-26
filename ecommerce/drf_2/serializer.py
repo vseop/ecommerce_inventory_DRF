@@ -1,4 +1,6 @@
 from attr import attributes
+from django.core.exceptions import ObjectDoesNotExist
+from django.db.models import Q
 from ecommerce.inventory.models import (
     Brand,
     Category,
@@ -10,6 +12,8 @@ from ecommerce.inventory.models import (
     ProductType,
 )
 from rest_framework import serializers
+
+from ecommerce.promotion.models import Promotion
 
 
 class ProductAttributeValueSerializer(serializers.ModelSerializer):
@@ -56,13 +60,13 @@ class ProductMediaSerializer(serializers.ModelSerializer):
 
 
 class ProductInventorySerializer(serializers.ModelSerializer):
-
     product = ProductSerializer(many=False, read_only=True)
     media = ProductMediaSerializer(many=True, read_only=True)
     brand = BrandSerializer(read_only=True)
     attributes = ProductAttributeValueSerializer(
         source="attribute_values", many=True, read_only=True
     )
+    promotion_price = serializers.SerializerMethodField()
 
     class Meta:
         model = ProductInventory
@@ -78,12 +82,22 @@ class ProductInventorySerializer(serializers.ModelSerializer):
             "media",
             "attributes",
             "product_type",
+            "promotion_price",
         ]
         read_only = True
 
+    def get_promotion_price(self, obj):
+
+        try:
+            x = Promotion.products_on_promotion.through.objects.get(
+                Q(promotion_id__is_active=True) & Q(product_inventory_id=obj.id)
+            )
+            return x.promo_price
+        except ObjectDoesNotExist:
+            return None
+
 
 class ProductInventorySearchSerializer(serializers.ModelSerializer):
-
     product = ProductSerializer(many=False, read_only=True)
     brand = BrandSerializer(many=False, read_only=True)
 
