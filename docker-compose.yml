@@ -77,17 +77,17 @@ services:
       - redis
     volumes:
       - .:/usr/src/app/
-#   celery-beat:
-#     container_name: celery_beat_ecommerce
-#     restart: always
-#     build:
-#       context: .
-#     command: celery -A ecommerce beat -l info
-#     depends_on:
-#       - redis
-#       - celery
-#     volumes:
-#       - .:/usr/src/app/
+  celery-beat:
+    container_name: celery_beat_ecommerce
+    restart: always
+    build:
+      context: .
+    command: celery -A ecommerce beat -l info
+    depends_on:
+      - redis
+      - celery
+    volumes:
+      - .:/usr/src/app/
 #   flower:
 #     container_name: flower_ecommerce
 #     image: mher/flower

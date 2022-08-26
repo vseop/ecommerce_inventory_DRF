@@ -14,7 +14,6 @@ from ecommerce.promotion.tasks import promotion_management, promotion_prices
     ],
 )
 def test_promotion_management(start, end, expected, celery_app, celery_worker, promotion_multi_variant):
-
     promotion_multi_variant.promo_start = start
     promotion_multi_variant.promo_end = end
     promotion_multi_variant.save(update_fields=["promo_start", "promo_end"])
