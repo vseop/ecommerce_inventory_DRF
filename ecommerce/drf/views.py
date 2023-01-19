@@ -90,14 +90,6 @@ class ProductByCategory(
 #         serializer = SingleProductSerializer(queryset)
 #         return Response(serializer.data)
 
-#     #     """
-#     #     A list of foo objects.
-#     #     """
-#     #     context = {"request": self.request}
-#     #     queryset = Foo.objects.all()
-#     #     serializer = FooSerializer(queryset, many=True, context=context)
-#     #     return Response(serializer.data)
-
 #     # def retrieve(self, request):
 #     #     queryset = ProductInventory.objects.filter(sku=sku)
 #     #     serializer = SingleProductSerializer(queryset, many=True)
