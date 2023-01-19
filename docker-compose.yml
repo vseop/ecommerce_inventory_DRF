@@ -3,7 +3,7 @@ version: "3.8"
 services:
 
   web:
-    restart: always
+#    restart: always
     container_name: web_ecommercev2
     build:
       context: .
@@ -15,12 +15,12 @@ services:
     depends_on:
       - redis
       - pgdb
-      - elasticsearch
+#      - elasticsearch
 
   pgdb:
     container_name: pgdb_ecommercev2
     image: postgres:12
-    restart: always
+#    restart: always
     ports:
       - 5432:5432
     environment:
@@ -43,7 +43,7 @@ services:
   elasticsearch:
     container_name: search
     image: elasticsearch:7.14.2
-    restart: always
+#    restart: always
     environment:
       - cluster.name=docker-cluster
       - discovery.type=single-node
@@ -58,14 +58,14 @@ services:
 
   redis:
     container_name: redis
-    restart: always
+#    restart: always
     image: redis:alpine
     ports:
       - 6379:6379
 
   celery:
     container_name: celery_ecommercev2
-    restart: always
+#    restart: always
     build:
       context: .
     command: celery -A ecommerce worker -l info
@@ -79,7 +79,7 @@ services:
       - .:/usr/src/app/
   celery-beat:
     container_name: celery_beat_ecommerce
-    restart: always
+#    restart: always
     build:
       context: .
     command: celery -A ecommerce beat -l info
